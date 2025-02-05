@@ -42,23 +42,25 @@ body {
 }
 
 
-.section-title, .mobile-section-title {
+.section-title {
     text-align: center;
     position: absolute;
 
     border: 1px solid black;
     padding: 5px 10px;
-    margin-bottom: 10px;
 
     font-size: 125%;
-}
-
-.section-title {
     right: 0;
     width: 200px;
 }
+
 .mobile-section-title {
     display: none;
+    text-align: center;
+    width: 100%;
+    font-size: 125%;
+    padding: 5px 10px;
+    border: 1px solid black;
 }
 
 .section-content {
@@ -124,10 +126,9 @@ body {
 
     .mobile-section-title {
         display: block;
-        width: 100%;
     }
 
     .section-content {
-        margin-top: 60px;
+        margin-top: 0;
     }
 }
