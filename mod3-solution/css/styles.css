@@ -4,6 +4,14 @@
     padding: 0;
 }
 
+.navbar {
+    background-color: beige;
+}
+
+.navbar-header, li {
+    border-bottom: 1px solid black;
+}
+
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 16px;
