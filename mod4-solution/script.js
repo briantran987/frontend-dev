@@ -63,7 +63,8 @@ for (var i = 0; i < names.length; i++) {
     helloSpeaker.speak(names[i]);
   }
 }
-console.log("break");
+
+// Use map
 function mappedGreeting (name) {
   var firstLetter = name.charAt(0).toLowerCase();
   var greeting;
@@ -77,15 +78,27 @@ function mappedGreeting (name) {
 }
 
 names.map(mappedGreeting);
-console.log("break");
+
+// Use reduce
 initialValue = {hello: [], bye: []};
 const reducedNames = names.reduce((acc, curr) => 
-  {if (firstLetter === 'j') {
+{
+  var firstLetter = curr.charAt(0).toLowerCase();
+  if (firstLetter === 'j') {
     acc.bye.push(byeSpeaker.speakSimple(curr));
   } else {
     acc.hello.push(helloSpeaker.speakSimple(curr));
-  }}
+  }
+  return acc;
+}
 , initialValue);
-console.log(reducedNames);
+
+for (var i = 0; i < reducedNames.hello.length; i++) {
+  console.log(reducedNames.hello[i]);
+}
+
+for (var i = 0; i < reducedNames.bye.length; i++) {
+  console.log(reducedNames.bye[i]);
+}
 
 })();
