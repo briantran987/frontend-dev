@@ -1,0 +1,19 @@
+body {
+  font-size: 1.2em;
+}
+
+li[ui-sref] {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+li[ui-sref]:hover {
+  display: inline-block;
+  cursor: pointer;
+  border: solid blue 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
