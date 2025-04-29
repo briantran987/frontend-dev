@@ -1,0 +1,79 @@
+<div class="container">
+    <fieldset>
+        <form name='signupForm' novalidate>
+
+        <input type="text" name="firstname" placeholder="First Name"
+            ng-model="signupCtrl.user.firstname"
+            pattern="[a-zA-Z]+"
+            required>
+            <span
+            ng-if="signupForm.firstname.$error.required && signupForm.firstname.$touched">
+                First Name Required
+            </span>
+            <span
+            ng-if="!signupForm.firstname.$error.required &&signupForm.firstname.$invalid && signupForm.firstname.$touched">
+                First Name must be letters only
+            </span>
+            <br>
+
+        <input type="text" name="lastname" placeholder="Last Name"
+            ng-model="signupCtrl.user.lastname"
+            pattern="[a-zA-Z]+"
+            required>
+            <span
+            ng-if="signupForm.lastname.$error.required && signupForm.lastname.$touched">
+                Last Name Required
+            </span>
+            <span
+            ng-if="!signupForm.lastname.$error.required &&signupForm.lastname.$invalid && signupForm.lastname.$touched">
+                Last Name must be letters only
+            </span>
+            <br>
+
+        <input type="email" name="email" placeholder="Email"
+            ng-model="signupCtrl.user.email"
+            required>
+            <span ng-if="signupForm.email.$error.required && signupForm.email.$touched">
+                Email Required
+            </span>
+            <span ng-if="!signupForm.email.$error.required && signupForm.email.$invalid && signupForm.email.$touched">
+                Must be a valid email address: handle@domain format
+            </span>
+            <br>
+
+        <input type="text" name="phone" placeholder="Phone ###-###-####"
+            ng-model="signupCtrl.user.phone"
+            pattern="(\d{3})-(\d{3})-(\d{4})">
+            <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
+            Phone must be in the format ###-###-####.
+            </span>
+            <br>
+
+        <input type="text" name="dish" placeholder="Favorite Dish"
+            ng-model="signupCtrl.user.dish"
+            pattern="[A-Z]+[0-9]+"
+            required>
+            <span
+            ng-if="signupForm.dish.$error.required && signupForm.dish.$touched">
+                Favorite Dish Required
+            </span>
+            <span
+            ng-if="!signupForm.dish.$error.required &&signupForm.dish.$invalid && signupForm.dish.$touched">
+                Favorite Dish must be in the format [A-Z]+[0-9]+
+            </span>
+            <br>
+
+        <button
+            ng-disabled="signupForm.$invalid"
+            ng-click="signupCtrl.submit()">Submit</button>
+        </form>
+    </fieldset>
+
+    <div ng-if="signupCtrl.completed">
+        Your information has been saved
+    </div>
+
+    <div ng-if="signupCtrl.submitted && !signupCtrl.completed">
+        No such menu number exists
+    </div>
+</div>
