@@ -8,19 +8,26 @@
     SignUpController.$inject = ['$http', 'ApiPath', 'AccountService'];
     function SignUpController($http, ApiPath, AccountService) {
       var $ctrl = this;
+      $ctrl.user = {};
       
-      $ctrl.submit = function () {
-        $ctrl.submitted = true;
+      $ctrl.checkDish = function (dish) {
+        if (dish.$valid) {
+          let category = dish.$viewValue.match(/^[^\d]*/);
+          let num = dish.$viewValue.match(/\d+/);
+          $ctrl.initForm = true;
+          $http.get(ApiPath + '/menu_items/' + category + '/menu_items/' + num + '.json')
+          .then(function (response) {
+            $ctrl.validDish = response.data != null;
+            if ($ctrl.validDish) {
+              $ctrl.user.dishInfo = response.data;
+              AccountService.registerUser($ctrl.user);
+            } 
+          });;
+        }
+      }
 
-        $http.get(ApiPath + '/menu_items/' + $ctrl.user.dish[0] + '/menu_items/' + $ctrl.user.dish[1] + '.json')
-        .then(function (response) {
-          $ctrl.completed = response.data != null;
-          if ($ctrl.completed) {
-            $ctrl.user.dishInfo = response.data;
-            console.log(JSON.stringify($ctrl.user.dishInfo));
-            AccountService.registerUser($ctrl.user);
-          }
-        });;
+      $ctrl.submit = function () {
+        $ctrl.submitted = $ctrl.validDish;
       };
     }
     

@@ -11,7 +11,7 @@
                 First Name Required
             </span>
             <span
-            ng-if="!signupForm.firstname.$error.required &&signupForm.firstname.$invalid && signupForm.firstname.$touched">
+            ng-if="!signupForm.firstname.$error.required && signupForm.firstname.$invalid && signupForm.firstname.$touched">
                 First Name must be letters only
             </span>
             <br>
@@ -51,6 +51,7 @@
 
         <input type="text" name="dish" placeholder="Favorite Dish"
             ng-model="signupCtrl.user.dish"
+            ng-blur="signupCtrl.checkDish(signupForm.dish)"
             pattern="[A-Z]+[0-9]+"
             required>
             <span
@@ -64,16 +65,16 @@
             <br>
 
         <button
-            ng-disabled="signupForm.$invalid"
+            ng-disabled="signupForm.$invalid && !signupCtrl.validDish"
             ng-click="signupCtrl.submit()">Submit</button>
         </form>
     </fieldset>
 
-    <div ng-if="signupCtrl.completed">
+    <div ng-if="signupCtrl.submitted">
         Your information has been saved
     </div>
 
-    <div ng-if="signupCtrl.submitted && !signupCtrl.completed">
+    <div ng-if="!signupCtrl.validDish && signupCtrl.initForm" >
         No such menu number exists
     </div>
 </div>
