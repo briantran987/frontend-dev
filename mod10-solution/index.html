@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/restaurant.css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="lib/jasmine-2.4.1/jasmine.css">
   </head>
   <body ng-app="restaurant" ng-strict-di>
 
@@ -111,10 +112,15 @@
     </footer>
 
     <!-- Libs -->
+    <script src="lib/angular.min.js"></script>
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
-    <script src="lib/angular.min.js"></script>
     <script src="lib/angular-ui-router.min.js"></script>
+    <script src="lib/jasmine-2.4.1/jasmine.js"></script>
+    <script src="lib/jasmine-2.4.1/jasmine-html.js"></script>
+    <script src="lib/jasmine-2.4.1/boot.js"></script>
+    <script src="lib/angular-mocks.js"></script>
+    <script src="lib/jasmine-2.4.1/console.js"></script>
 
     <!-- Main Restaurant Module -->
     <script src="src/restaurant.module.js"></script>
@@ -136,6 +142,9 @@
     <script src="src/public/signup/signup.controller.js"></script>
     <script src="src/public/info/info.controller.js"></script>
     <script src="src/public/account.service.js"></script>
+
+
+    <script src="src/test/signup.controller.spec.js"></script>
 
     <!-- ADMIN SITE -->
 
