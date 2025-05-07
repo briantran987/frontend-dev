@@ -2,7 +2,7 @@
   "use strict";
   
   describe('SignUpController', function () {
-    var $controller, $http, $httpBackend, ApiPath, AccountServiceMock, ctrl;
+    var $controller, $httpBackend, ApiPath, AccountServiceMock, ctrl;
   
     beforeEach(module('public'));
   
@@ -13,14 +13,12 @@
       $provide.value('AccountService', AccountServiceMock);
     }));
   
-    beforeEach(inject(function (_$controller_, _$http_, _$httpBackend_, _ApiPath_) {
+    beforeEach(inject(function (_$controller_, _$httpBackend_, _ApiPath_) {
       $controller = _$controller_;
-      $http = _$http_;  // Inject the actual $http service
-      $httpBackend = _$httpBackend_;  // Inject $httpBackend for mocking responses
+      $httpBackend = _$httpBackend_;
       ApiPath = _ApiPath_;
   
       ctrl = $controller('SignUpController', {
-        $http: $http,  // Pass the actual $http service
         ApiPath: ApiPath,
         AccountService: AccountServiceMock
       });
@@ -31,7 +29,7 @@
       $httpBackend.verifyNoOutstandingRequest();
     });
   
-    it('should validate dish and register user when dish is valid', function () {
+    it('Valid dish test', function () {
       var mockDish = {
         $valid: true,
         $viewValue: 'L1'
@@ -43,9 +41,7 @@
         short_name: 'L1'
       };
   
-      var category = 'L';
-      var num = '1';
-      var url = ApiPath + '/menu_items/' + category + '/menu_items/' + num + '.json';
+      var url = ApiPath + '/menu_items/L/menu_items/1.json';
   
       $httpBackend.expectGET(url).respond(200, mockResponse);
   
@@ -57,25 +53,22 @@
       expect(AccountServiceMock.registerUser).toHaveBeenCalledWith(ctrl.user);
     });
   
-    it('should not user when dish is invalid', function () {
+    it('Invalid dish test', function () {
       var mockDish = {
         $valid: true,
         $viewValue: 'Z9'
       };
   
-      var category = 'Z';
-      var num = '9';
-      var url = ApiPath + '/menu_items/' + category + '/menu_items/' + num + '.json';
+      var url = ApiPath + '/menu_items/Z/menu_items/9.json';
   
-      // Simulating 404 error for invalid dish
       $httpBackend.expectGET(url).respond(200, null);
   
       ctrl.checkDish(mockDish);
       $httpBackend.flush();
   
-      expect(ctrl.validDish).toBe(false); // Dish should be invalid
-      expect(ctrl.user.dishInfo).toBeUndefined(); // No dish info should be assigned
-      expect(AccountServiceMock.registerUser).not.toHaveBeenCalled(); // User should not be registered
+      expect(ctrl.validDish).toBe(false);
+      expect(ctrl.user.dishInfo).toBeUndefined();
+      expect(AccountServiceMock.registerUser).not.toHaveBeenCalled();
     });
   
   });
